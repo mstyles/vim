@@ -23,9 +23,11 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
 Bundle 'mileszs/ack.vim'
 Bundle 'vim-scripts/mru.vim'
 Bundle 'scrooloose/syntastic'
+" Bundle 'joonty/vim-phpqa'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 Bundle 'kien/ctrlp.vim'
@@ -33,6 +35,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'vim-scripts/taglist.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'vim-scripts/tComment'
+Bundle 'vim-scripts/dbext.vim'
 Bundle 'bling/vim-airline'
 Bundle 'joonty/vdebug'
 Bundle 'nanotech/jellybeans.vim'
@@ -80,13 +83,19 @@ set ttyfast                              " makes things... smoother?
 let NERDChristmasTree = 1
 
 let g:ctrlp_max_height = 30
-let g:ctrlp_by_filename = 1
+" let g:ctrlp_by_filename = 1
 let g:ctrlp_root_markers = ['.domainconfig']
 let g:ctrlp_max_files = 0
 let g:ctrlp_extensions = ['tag']
 
 "let g:vdebug_options['continuous_mode'] = 1
 let g:airline_section_b = '%t'
+
+" let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_php_checkers = ['php']
+
+" let g:phpqa_messdetector_autorun = 0
+" let g:phpqa_codesniffer_autorun = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " $FILE TYPE SETTINGS
@@ -140,22 +149,26 @@ nnoremap K i<CR><Esc>
 inoremap jj <Esc>
 
 "map <leader><Tab> <C-w><C-w>
+map <leader>a :Chanstat<CR>
 nmap <leader>c ::bp\|bd #<CR>
 map <leader>f <ESC>:NERDTreeFind<CR>
 map <leader>g :GitGutterToggle<CR>
+map <leader>h :Hangup<CR>
 nmap <leader>l :set list!<CR>
+map <leader>o :Workers<CR>
 map <leader>p :set paste!<CR>
 map <leader>r :Run<CR>
 nmap <leader>s :source $MYVIMRC<CR>:noh<CR>
 map <leader>t :TagbarToggle<CR>
+map <leader>u :Unittest<CR>
 nmap <leader>v :e $MYVIMRC<CR>
 nnoremap <leader>w :call <SID>StripTrailingWhitespaces()<CR>
 "nnoremap <leader>c :Copy<CR><CR>
-map <leader>h :if exists("g:syntax_on") <Bar>
-    \ syntax off <Bar>
-    \ else <Bar>
-    \syntax on <Bar>
-    \ endif <CR>
+" map <leader>h :if exists("g:syntax_on") <Bar>
+"     \ syntax off <Bar>
+"     \ else <Bar>
+"     \syntax on <Bar>
+"     \ endif <CR>
 
 " colon, semi-colon switch
 nnoremap ; :
@@ -172,14 +185,21 @@ command! -nargs=* GccCat !gcc % -o prog.out && chmod +x prog.out && cat <f-args>
 " php
 command! Cupdate !composer update
 command! Cautoload !composer dumpautoload
-command! -nargs=* Test !phpunit <f-args>
+"command! -nargs=* Test !phpunit <f-args>
+command! Unittest !cd %:h; cd -- "$(upfind -name 'phpunit.xml.dist')"; phpunit --debug -d memory_limit=768M %
 command! ViewTests !gnome-open ./bin/report/index.html
+
+"asterisk
+command! Hangup !asterisk -x 'channel request hangup all'
+command! Chanstat !asterisk -x 'core show channels concise'
+command! -nargs=* Release !yes y | php ext/is/nexusdomain/is/tools/asterisk_release.php <f-args>
 
 " git commands
 "command! Ann !git annotate %
 "command! Stat !git status
 command! -nargs=* Diff !git diff <f-args>
 
+command! Workers !cd /var/www/CommsWorkers && ./restartworkers.sh
 " run scripts
 command! Run !file=$(basename %);ext="${file\#\#*.}"; clear;
 \ case $ext in
