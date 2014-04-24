@@ -17,29 +17,30 @@
 set nocompatible              " be iMproved
 filetype off                  " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-Bundle 'mileszs/ack.vim'
-Bundle 'vim-scripts/mru.vim'
-Bundle 'scrooloose/syntastic'
-" Bundle 'joonty/vim-phpqa'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'jeffkreeftmeijer/vim-numbertoggle'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'vim-scripts/tComment'
-Bundle 'vim-scripts/dbext.vim'
-Bundle 'bling/vim-airline'
-Bundle 'joonty/vdebug'
-Bundle 'nanotech/jellybeans.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'mileszs/ack.vim'
+Plugin 'vim-scripts/mru.vim'
+Plugin 'scrooloose/syntastic'
+" Plugin 'joonty/vim-phpqa'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/tComment'
+Plugin 'vim-scripts/dbext.vim'
+Plugin 'bling/vim-airline'
+Plugin 'joonty/vdebug'
+Plugin 'nanotech/jellybeans.vim'
 
+call vundle#end()
 filetype plugin indent on     " required!
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
