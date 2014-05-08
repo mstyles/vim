@@ -91,6 +91,8 @@ let g:ctrlp_extensions = ['tag']
 
 "let g:vdebug_options['continuous_mode'] = 1
 let g:airline_section_b = '%t'
+let g:airline_section_y = ''
+let g:airline#extensions#tabline#enabled = 1
 
 " let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 let g:syntastic_php_checkers = ['php']
@@ -153,7 +155,7 @@ inoremap jj <Esc>
 map <leader>a :Chanstat<CR>
 nmap <leader>c ::bp\|bd #<CR>
 map <leader>f <ESC>:NERDTreeFind<CR>
-map <leader>g :GitGutterToggle<CR>
+map <leader>g :GitGutterNextHunk<CR>
 map <leader>h :Hangup<CR>
 nmap <leader>l :set list!<CR>
 map <leader>o :Workers<CR>
