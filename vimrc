@@ -35,10 +35,12 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/tComment'
-Plugin 'vim-scripts/dbext.vim'
+" Plugin 'vim-scripts/dbext.vim'
 Plugin 'bling/vim-airline'
 Plugin 'joonty/vdebug'
 Plugin 'nanotech/jellybeans.vim'
+Plugin 'stephpy/vim-php-cs-fixer'
+Plugin 'phleet/vim-arcanist'
 
 call vundle#end()
 filetype plugin indent on     " required!
@@ -65,7 +67,7 @@ set numberwidth=4                        " set line numbers section width
 set shiftwidth=4                         " shift movement length
 set colorcolumn=120
 set expandtab
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip " ignored by vim fs access
+set wildignore+=*/tmp/*,*.so,*.swp " ignored by vim fs access
 set wildignore+=*/templates_c/*,*/bin/*
 set wildignore+=*/node_modules/*
 set t_Co=256
@@ -94,11 +96,24 @@ let g:airline_section_b = '%t'
 let g:airline_section_y = ''
 let g:airline#extensions#tabline#enabled = 1
 
-" let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 let g:syntastic_php_checkers = ['php']
+" let g:syntastic_php_checkers = ['php', 'phpcs']
+" let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 
 " let g:phpqa_messdetector_autorun = 0
 " let g:phpqa_codesniffer_autorun = 0
+
+" If php-cs-fixer is in $PATH, you don't need to define line below
+" let g:php_cs_fixer_path = "~/php-cs-fixer.phar" " define the path to the
+" php-cs-fixer.phar
+let g:php_cs_fixer_level = "all"                  " which level ?
+let g:php_cs_fixer_config = "default"             " configuration
+let g:php_cs_fixer_php_path = "php"               " Path to PHP
+" If you want to define specific fixers:
+"let g:php_cs_fixer_fixers_list = "linefeed,short_tag,indentation"
+let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
+let g:php_cs_fixer_verbose = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " $FILE TYPE SETTINGS
@@ -116,6 +131,7 @@ au BufNewFile,BufRead *.twig set ft=htmljinja
 au BufNewFile,BufRead *.dist set ft=xml
 au BufNewFile,BufRead *.pp set ft=ruby
 au BufNewFile,BufRead .domainconfig set ft=dosini
+" au BufNewFile,BufRead *.conf set ft=apache
 
 " work shift
 au BufNewFile,BufRead *.tpl set ft=smarty
@@ -154,6 +170,7 @@ inoremap jj <Esc>
 "map <leader><Tab> <C-w><C-w>
 map <leader>a :Chanstat<CR>
 nmap <leader>c ::bp\|bd #<CR>
+map <leader>d :Staged<CR>
 map <leader>f <ESC>:NERDTreeFind<CR>
 map <leader>g :GitGutterNextHunk<CR>
 map <leader>h :Hangup<CR>
@@ -201,8 +218,9 @@ command! -nargs=* Release !yes y | php ext/is/nexusdomain/is/tools/asterisk_rele
 "command! Ann !git annotate %
 "command! Stat !git status
 command! -nargs=* Diff !git diff <f-args>
+command! Staged Git! diff --staged
 
-command! Workers !cd /var/www/CommsWorkers && ./restartworkers.sh
+command! Workers !~/restartworkers.sh
 " run scripts
 command! Run !file=$(basename %);ext="${file\#\#*.}"; clear;
 \ case $ext in
