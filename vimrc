@@ -35,7 +35,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/tComment'
-" Plugin 'vim-scripts/dbext.vim'
+Plugin 'vim-scripts/dbext.vim'
 Plugin 'bling/vim-airline'
 Plugin 'joonty/vdebug'
 Plugin 'nanotech/jellybeans.vim'
@@ -89,7 +89,7 @@ let g:ctrlp_max_height = 30
 " let g:ctrlp_by_filename = 1
 let g:ctrlp_root_markers = ['.domainconfig']
 let g:ctrlp_max_files = 0
-let g:ctrlp_extensions = ['tag']
+let g:ctrlp_extensions = ['tag', 'buffertag']
 
 "let g:vdebug_options['continuous_mode'] = 1
 let g:airline_section_b = '%t'
