@@ -167,6 +167,10 @@ nnoremap K i<CR><Esc>
 " exit insert mode within insert mode
 inoremap jj <Esc>
 
+" give C-p/C-n the filtering power of Up/Down in Command mode
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
 "map <leader><Tab> <C-w><C-w>
 map <leader>a :Chanstat<CR>
 nmap <leader>c ::bp\|bd #<CR>
