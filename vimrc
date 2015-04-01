@@ -49,6 +49,7 @@ filetype plugin indent on     " required!
 " $VIM SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 scriptencoding utf-8
+set modeline                             " Enable vim modelines (for dbext.vim)
 set hidden                               " best. thing. ever. no buffer closed
 set antialias
 set cursorline                           " highlight the line cursor is on
@@ -56,7 +57,7 @@ set hlsearch                             " highlight all matches
 set ignorecase                           " case insensitive searches
 set incsearch                            " highlight matches while typing
 set ls=2
-set nowrap
+set nowrap                               " Don't wrap lines
 set number                               " show line numbers
 set showmatch                            " jump to search result
 set smartcase                            " case insensitive defaul
@@ -65,8 +66,8 @@ set softtabstop=4                        " back character length
 set tabstop=4                            " tab character length
 set numberwidth=4                        " set line numbers section width
 set shiftwidth=4                         " shift movement length
-set colorcolumn=120
-set expandtab
+set colorcolumn=120                      " Mark column at 120 chars
+set expandtab                            " Expand tabs to spaces
 set wildignore+=*/tmp/*,*.so,*.swp " ignored by vim fs access
 set wildignore+=*/templates_c/*,*/bin/*
 set wildignore+=*/node_modules/*
@@ -90,8 +91,11 @@ let g:ctrlp_max_height = 30
 let g:ctrlp_root_markers = ['.domainconfig']
 let g:ctrlp_max_files = 0
 let g:ctrlp_extensions = ['tag', 'buffertag']
+let g:ctrlp_follow_symlinks=1
 
-"let g:vdebug_options['continuous_mode'] = 1
+let g:vdebug_options = {"port" : 9001}
+" let g:vdebug_options['continuous_mode'] = 1
+" let g:vdebug_options = {"timeout" : 20}
 let g:airline_section_b = '%t'
 let g:airline_section_y = ''
 let g:airline#extensions#tabline#enabled = 1
