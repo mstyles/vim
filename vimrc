@@ -71,6 +71,7 @@ set expandtab                            " Expand tabs to spaces
 set wildignore+=*/tmp/*,*.so,*.swp " ignored by vim fs access
 set wildignore+=*/templates_c/*,*/bin/*
 set wildignore+=*/node_modules/*
+set wildignore+=*/QueryBuilder.deploy*/*
 set t_Co=256
 set wildmenu
 set tags^=./.tags,./.TAGS,.tags,.TAGS
@@ -93,9 +94,8 @@ let g:ctrlp_max_files = 0
 let g:ctrlp_extensions = ['tag', 'buffertag']
 let g:ctrlp_follow_symlinks=1
 
-let g:vdebug_options = {"port" : 9001}
+let g:vdebug_options = {"port" : 9001, "break_on_open" : 0, 'continuous_mode' : 1}
 " let g:vdebug_options['continuous_mode'] = 1
-" let g:vdebug_options = {"timeout" : 20}
 let g:airline_section_b = '%t'
 let g:airline_section_y = ''
 let g:airline#extensions#tabline#enabled = 1
@@ -143,7 +143,7 @@ au BufNewFile,BufRead *{.inc,.lan,.view,.act,.get,.controller} set ft=php
 
 " apex shiat
 au BufNewFile,BufRead *.cls set ft=java
-au BufNewFile,BufRead *.page set ft=html
+au BufNewFile,BufRead *.page set ft=xml
 au BufNewFile,BufRead *.object set ft=xml
 hi link javaCharacter javaString
 hi link javaSpecialCharError javaString
@@ -188,7 +188,7 @@ map <leader>p :set paste!<CR>
 map <leader>r :Run<CR>
 nmap <leader>s :source $MYVIMRC<CR>:noh<CR>
 map <leader>t :TagbarToggle<CR>
-map <leader>u :Unittest<CR>
+map <leader>u :Unittest <C-r><C-w><CR>
 nmap <leader>v :e $MYVIMRC<CR>
 nnoremap <leader>w :call <SID>StripTrailingWhitespaces()<CR>
 "nnoremap <leader>c :Copy<CR><CR>
@@ -214,7 +214,7 @@ command! -nargs=* GccCat !gcc % -o prog.out && chmod +x prog.out && cat <f-args>
 command! Cupdate !composer update
 command! Cautoload !composer dumpautoload
 "command! -nargs=* Test !phpunit <f-args>
-command! Unittest !cd %:h; cd -- "$(upfind -name 'phpunit.xml.dist')"; phpunit --debug -d memory_limit=768M %
+command! -nargs=1 Unittest !cd %:h; cd -- "$(upfind -name 'phpunit.xml.dist')"; phpunit --debug --filter=<f-args> %
 command! ViewTests !gnome-open ./bin/report/index.html
 
 "asterisk
