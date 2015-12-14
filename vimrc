@@ -93,9 +93,10 @@ let g:ctrlp_root_markers = ['.domainconfig']
 let g:ctrlp_max_files = 0
 let g:ctrlp_extensions = ['tag', 'buffertag']
 let g:ctrlp_follow_symlinks=1
+let g:ctrlp_use_caching=1
+let g:ctrlp_clear_cache_on_exit = 0
 
 let g:vdebug_options = {"port" : 9001, "break_on_open" : 0, 'continuous_mode' : 1}
-" let g:vdebug_options['continuous_mode'] = 1
 let g:airline_section_b = '%t'
 let g:airline_section_y = ''
 let g:airline#extensions#tabline#enabled = 1
@@ -162,8 +163,12 @@ map <S-f> <ESC>:NERDTreeTabsToggle<CR>
 map <C-l> <ESC>:echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
 map <C-j> <ESC>:bp<CR>
 map <C-k> <ESC>:bn<CR>
+
+" 's'ave
 map <S-s> <ESC>:w<CR>
+" 's'ave
 map <C-s> <ESC>:w<CR>
+
 map <Tab> <C-w><C-w>
 nnoremap <CR> :noh<CR><CR>:<backspace>
 nnoremap K i<CR><Esc>
@@ -177,8 +182,16 @@ cnoremap <C-n> <Down>
 
 "map <leader><Tab> <C-w><C-w>
 map <leader>a :Chanstat<CR>
+
+" 's'ql 'r'esults 'c'lose. Close results from dbext
+map <leader>src :DBResultsClose<CR>
+
+" 'c'lose. Close the current buffer w/out closing the window.
 nmap <leader>c ::bp\|bd #<CR>
+
+" 'd'iff. Show currently staged changes.
 map <leader>d :Staged<CR>
+
 map <leader>f <ESC>:NERDTreeFind<CR>
 map <leader>g :GitGutterNextHunk<CR>
 map <leader>h :Hangup<CR>
