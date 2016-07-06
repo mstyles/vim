@@ -27,7 +27,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'mileszs/ack.vim'
 Plugin 'vim-scripts/mru.vim'
 Plugin 'scrooloose/syntastic'
-" Plugin 'joonty/vim-phpqa'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'kien/ctrlp.vim'
@@ -87,6 +86,8 @@ set ttyfast                              " makes things... smoother?
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let NERDChristmasTree = 1
 
+let g:gitgutter_max_signs = 10000
+
 let g:ctrlp_max_height = 30
 " let g:ctrlp_by_filename = 1
 let g:ctrlp_root_markers = ['.domainconfig']
@@ -97,6 +98,7 @@ let g:ctrlp_use_caching=1
 let g:ctrlp_clear_cache_on_exit = 0
 
 let g:vdebug_options = {"port" : 9001, "break_on_open" : 0, 'continuous_mode' : 1}
+
 let g:airline_section_b = '%t'
 let g:airline_section_y = ''
 let g:airline#extensions#tabline#enabled = 1
