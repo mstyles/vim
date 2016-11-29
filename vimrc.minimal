@@ -16,42 +16,14 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved
 filetype off                  " required!
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'gmarik/vundle'
-
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'mileszs/ack.vim'
-Plugin 'vim-scripts/mru.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'vim-scripts/tComment'
-Plugin 'vim-scripts/dbext.vim'
-Plugin 'bling/vim-airline'
-Plugin 'joonty/vdebug'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'stephpy/vim-php-cs-fixer'
-Plugin 'phleet/vim-arcanist'
-
-call vundle#end()
 filetype plugin indent on     " required!
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " $VIM SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 scriptencoding utf-8
-set modeline                             " Enable vim modelines (for dbext.vim)
 set hidden                               " best. thing. ever. no buffer closed
 set antialias
-set cursorline                           " highlight the line cursor is on
 set hlsearch                             " highlight all matches
 set ignorecase                           " case insensitive searches
 set incsearch                            " highlight matches while typing
@@ -82,48 +54,6 @@ set scrolloff=3                          " buffer for screen when scrolling
 set ttyfast                              " makes things... smoother?
 
 syntax on
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" $PLUGIN SETTINGS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let NERDChristmasTree = 1
-
-let g:gitgutter_max_signs = 10000
-
-let g:ctrlp_max_height = 30
-" begin finding a root from the current working directory outside of CtrlP
-let g:ctrlp_working_path_mode = 'w'
-let g:ctrlp_root_markers = ['.domainconfig']
-let g:ctrlp_max_files = 0
-let g:ctrlp_extensions = ['tag', 'buffertag']
-let g:ctrlp_follow_symlinks=1
-let g:ctrlp_use_caching=1
-let g:ctrlp_clear_cache_on_exit = 0
-
-let g:vdebug_options = {"port" : 9001, "break_on_open" : 0, 'continuous_mode' : 1}
-
-let g:airline_section_b = '%t'
-let g:airline_section_y = ''
-let g:airline#extensions#tabline#enabled = 1
-
-let g:syntastic_php_checkers = ['php']
-" let g:syntastic_php_checkers = ['php', 'phpcs']
-" let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
-
-" let g:phpqa_messdetector_autorun = 0
-" let g:phpqa_codesniffer_autorun = 0
-
-" If php-cs-fixer is in $PATH, you don't need to define line below
-" let g:php_cs_fixer_path = "~/php-cs-fixer.phar" " define the path to the
-" php-cs-fixer.phar
-let g:php_cs_fixer_level = "all"                  " which level ?
-let g:php_cs_fixer_config = "default"             " configuration
-let g:php_cs_fixer_php_path = "php"               " Path to PHP
-" If you want to define specific fixers:
-"let g:php_cs_fixer_fixers_list = "linefeed,short_tag,indentation"
-let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
-let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
-let g:php_cs_fixer_verbose = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " $FILE TYPE SETTINGS
@@ -164,9 +94,12 @@ map <C-c> <ESC>:TComment<CR>
 xmap <C-c> <ESC>:'<,'>TComment<CR>
 map <S-f> <ESC>:NERDTreeTabsToggle<CR>
 
-" convenient moving of lines up/down
 nnoremap j :m .+1<CR>==
 nnoremap k :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
 "map <C-t> <ESC>:exec('tag '.expand("<cword>"))<CR>
 map <C-l> <ESC>:echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
@@ -236,7 +169,7 @@ command! -nargs=* GccCat !gcc % -o prog.out && chmod +x prog.out && cat <f-args>
 command! Cupdate !composer update
 command! Cautoload !composer dumpautoload
 "command! -nargs=* Test !phpunit <f-args>
-command! -nargs=1 Unittest !phpunit --debug --filter=<f-args> %
+command! -nargs=1 Unittest !cd %:h; cd -- "$(upfind -name 'phpunit.xml.dist')"; phpunit --debug --filter=<f-args> %
 command! ViewTests !gnome-open ./bin/report/index.html
 
 "asterisk
@@ -274,7 +207,7 @@ command! Run !file=$(basename %);ext="${file\#\#*.}"; clear;
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLORSCHEME
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme jellybeans
+colorscheme default
 
 hi Constant                    ctermfg=229
 "hi String                      ctermfg=229
