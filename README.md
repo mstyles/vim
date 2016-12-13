@@ -1,10 +1,27 @@
 # vim
-Setup:
-<ol>
-<li>clone repo into '.vim'</li>
-<li>simlink .vimrc to .vim/vimrc</li>
-<li>cd '.vim'</li>
-<li>git submodule update --init</li>
-<li>vim +PluginInstall +qall (per Vundle's install instructions)</li>
-<li>rejoice</li>
-</ol>
+## Setup
+1. clone repo into '.vim'
+    ```
+    git clone https://github.com/mstyles/vim.git ~/.vim
+    ```
+1. simlink .vimrc to .vim/vimrc
+    ```
+    ln -s ~/.vim/vimrc ~/.vimrc
+    ```
+1. Enter vim directory
+    ```
+    cd ~/.vim
+    ```
+1. Install submodule
+    ```
+    git submodule update --init
+    ```
+1. Open vim
+    ```
+    vim
+    ```
+1. Install packages using dein
+    ```
+    :call dein#install()
+    ```
+1. rejoice
