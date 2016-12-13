@@ -1,48 +1,57 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" LOAD EXTERNALS.................load external resources, start package manager
-" VIM SETTINGS..................................vim built in setting overwrites
-" PLUGIN SETTINGS.....................................plugin setting overwrites
-" ENV SPECIFIC SETTINGS............settings that are specific to an environment
-" FILE TYPE SETTINGS......................file type specific setting overwrites
-" MAPPINGS..................................................custom key mappings
-" COMMANDS......................................................custom commands
-" COLORSCHEME..................................colorscheme and color overwrites
-" SYNTAX...........................syntax (keyword) rebinding and configuration
-" FUNCTIONS....................................................custom functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" $LOAD EXTERNALS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible              " be iMproved
-filetype off                  " required!
+" Required:
+set runtimepath+=$HOME/.vim/dein/repos/github.com/Shougo/dein.vim
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Required:
+call dein#begin('$HOME/.vim/dein')
 
-Plugin 'gmarik/vundle'
+" Let dein manage dein
+" Required:
+call dein#add('Shougo/dein.vim')
 
-Plugin 'airblade/vim-gitgutter'
-Plugin 'bling/vim-airline'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
-Plugin 'joonty/vdebug'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'mileszs/ack.vim'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'phleet/vim-arcanist'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'stephpy/vim-php-cs-fixer'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-scripts/dbext.vim'
-Plugin 'vim-scripts/mru.vim'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'vim-scripts/tComment'
+" Add or remove your plugins here:
+" call dein#add('Shougo/neosnippet.vim')
+" call dein#add('Shougo/neosnippet-snippets')
+call dein#add('airblade/vim-gitgutter')
+call dein#add('bling/vim-airline')
+call dein#add('fatih/vim-go')
+call dein#add('jeffkreeftmeijer/vim-numbertoggle')
+call dein#add('joonty/vdebug')
+call dein#add('kien/ctrlp.vim')
+call dein#add('majutsushi/tagbar')
+call dein#add('mileszs/ack.vim')
+call dein#add('nanotech/jellybeans.vim')
+call dein#add('phleet/vim-arcanist')
+call dein#add('scrooloose/nerdtree')
+call dein#add('scrooloose/syntastic')
+call dein#add('stephpy/vim-php-cs-fixer')
+call dein#add('tpope/vim-fugitive')
+call dein#add('tpope/vim-surround')
+call dein#add('vim-scripts/dbext.vim')
+call dein#add('vim-scripts/mru.vim')
+call dein#add('vim-scripts/taglist.vim')
+call dein#add('vim-scripts/tComment')
 
-call vundle#end()
-filetype plugin indent on     " required!
+" You can specify revision/branch/tag.
+" call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+
+" Required:
+call dein#end()
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
+
+"End dein Scripts-------------------------
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " $VIM SETTINGS
