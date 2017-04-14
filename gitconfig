@@ -1,0 +1,7 @@
+[user]
+	name = Matt Styles
+	email = mstyles@insidesales.com
+[push]
+	default = upstream
+[log]
+	decorate = auto
