@@ -260,30 +260,53 @@ command! -nargs=* Diff !git diff <f-args>
 command! Staged Git! diff --staged
 
 command! Workers !~/restartworkers.sh
+
 " run scripts
-command! Run !file=$(basename %);ext="${file\#\#*.}"; clear;
+command! Run !file=$(basename %);ext="${file\#\#*.}";filename="${file\%.*}"; clear;
 \ case $ext in
+    \ scala)
+        \ scala % | less --quit-at-eof
+        \ ;;
     \ php)
-        \ php % | less
+        \ php % | less --quit-at-eof
         \ ;;
     \ js)
-        \ node % | less
+        \ DEBUG_COLORS=1 DEBUG=* node --harmony % | less --quit-at-eof
         \ ;;
     \ py)
-        \ python % | less
+        \ python % | less --quit-at-eof
+        \ ;;
+    \ lisp)
+        \ clisp % | less --quit-at-eof
         \ ;;
     \ rb)
-        \ ruby % | less
+        \ ruby % | less --quit-at-eof
+        \ ;;
+    \ yaml|yml)
+        \ yaml2json % | python -m json.tool | less --quit-at-eof
+        \ ;;
+    \ lua)
+        \ lua % | less --quit-at-eof
+        \ ;;
+    \ md|markdown)
+        \ ghmd %; open %:h/$filename.html; sleep 1; rm %:h/$filename.html;
+        \ ;;
+    \ go)
+        \ go run % | less --quit-at-eof
         \ ;;
     \ *)
-        \ echo "i don't know what to do with .$ext files"
+        \ ./%
         \ ;;
 \ esac
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLORSCHEME
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme jellybeans
+try
+    colorscheme jellybeans
+catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme desert
+endtry
 
 hi Constant                    ctermfg=229
 "hi String                      ctermfg=229

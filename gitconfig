@@ -5,3 +5,10 @@
 	default = upstream
 [log]
 	decorate = auto
+[color]
+	ui = auto
+[status]
+	short = true
+	branch = true
+[core]
+	excludesfile = ~/.gitignore
